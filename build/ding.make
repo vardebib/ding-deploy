@@ -207,6 +207,8 @@ projects[dynamo][download][type] = "git"
 projects[dynamo][download][url] = "https://github.com/dingproject/dynamo.git"
 projects[dynamo][download][revision] = "v2.1.5"
 
+; Varde theme
+
 ; Ding modules
 
 projects[alma][type] = "module"
