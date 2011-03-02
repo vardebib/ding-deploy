@@ -209,6 +209,10 @@ projects[dynamo][download][revision] = "v2.1.5"
 
 ; Varde theme
 
+projects[varde][type] = "theme"
+projects[varde][download][type] = "git"
+projects[varde][download][url] = "https://github.com/vardebib/varde.git" 
+
 ; Ding modules
 
 projects[alma][type] = "module"
