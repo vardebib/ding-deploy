@@ -31,10 +31,10 @@ def parse_args():
                       action="store", dest="mode", default='site',
                       help="what build mode to use. 'site' for full Drupal site, 'profile' for just the installation profile. Default is 'site'.")
     parser.add_option("-v", "--verbose",
-                      action="store_true", dest="verbose", default=False,
-                      help="make lots of noise")
+                      action="store_true", dest="verbose", default=True,
+                      help="make lots of noise [default]")
     parser.add_option("-q", "--quiet",
-                      action="store_true", dest="quiet", default=False,
+                      action="store_false", dest="verbose", default=True,
                       help="don't print status messages to stdout")
 
     return parser.parse_args()
@@ -42,8 +42,8 @@ def parse_args():
 
 def configure_logging(options):
     """
-    Set up a an instance of Python's standard logging utility.
-    """
+Set up a an instance of Python's standard logging utility.
+"""
     if options.debug:
         level = logging.DEBUG
     elif options.verbose:
@@ -69,7 +69,7 @@ def make_command(options, make_path):
         command.insert(1, '-d')
     elif options.verbose:
         command.insert(1, '-v')
-    elif options.quiet:
+    else:
         command.insert(1, '-q')
 
     # For developers, keep SCM checkouts.
@@ -93,10 +93,10 @@ def start_make(command):
 
 def setup_profile(options, make_path):
     """
-    Setup the make product as a Drupal install profile.
+Setup the make product as a Drupal install profile.
 
-    Handles copying the profile file into the correct folder.
-    """
+Handles copying the profile file into the correct folder.
+"""
     if options.mode == 'site':
         path = os.path.join(make_path, 'profiles', 'ding')
     else:
@@ -106,8 +106,8 @@ def setup_profile(options, make_path):
 
 def create_symlinks(options, make_path):
     """
-    Set up symlinks to latest and previous build.
-    """
+Set up symlinks to latest and previous build.
+"""
     if options.symlink_prefix:
         latest = '%s-latest' % options.symlink_prefix
         previous = '%s-previous' % options.symlink_prefix
@@ -148,4 +148,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
